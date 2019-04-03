@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "516238078712",
+    "firebase_url": "https://gail-365a8.firebaseio.com",
+    "project_id": "gail-365a8",
+    "storage_bucket": "gail-365a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516238078712:android:e371a7af1023b323",
+        "android_client_info": {
+          "package_name": "com.example.gail"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516238078712-jo823fppf97643qael00sdv6nig9lbr8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gail",
+            "certificate_hash": "fdcca0f001cf00c0143f6ecb9c44464fc8d018a0"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwzzU1rV9O2OGKoP-mdoBuLiUpjAShoFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516238078712-bdgh7s8dt9afsdcv86r4dk6scbjcsu5l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
