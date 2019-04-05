@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.gail.Adapter.GailAdapter;
 import com.example.gail.Class.GailInfo;
@@ -22,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     GailAdapter gailAdapter;
     List<GailInfo> gailInfoList;
+    SearchView searchView;
+    DatabaseReference dbRef;
+    Button addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,32 +35,73 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.mainRvId);
+        searchView = findViewById(R.id.search_viewId);
+        addButton = findViewById(R.id.add_rowBtnId);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         gailInfoList = new ArrayList<>();
 
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-        dbRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    gailInfoList.clear();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        GailInfo gailInfo = snapshot.getValue(GailInfo.class);
-                        gailInfoList.add(gailInfo);
+        dbRef = FirebaseDatabase.getInstance().getReference();
+
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (dbRef != null){
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        gailInfoList.clear();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            GailInfo gailInfo = snapshot.getValue(GailInfo.class);
+                            gailInfoList.add(gailInfo);
+                        }
+                        gailAdapter = new GailAdapter(MainActivity.this,gailInfoList);
+                        recyclerView.setAdapter(gailAdapter);
                     }
-                    gailAdapter = new GailAdapter(MainActivity.this,gailInfoList);
-                    recyclerView.setAdapter(gailAdapter);
                 }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+        if (searchView != null){
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    search(s);
+                    return true;
+                }
+            });
+        }
+    }
+
+    private void search(String str) { 
+        ArrayList<GailInfo> myList = new ArrayList<>();
+        for (GailInfo obj : gailInfoList){
+            if (obj.getMouja().toLowerCase().contains(str.toLowerCase())
+                    || obj.getThana().toLowerCase().contains(str.toLowerCase())
+                    || obj.getRs().toLowerCase().contains(str.toLowerCase())
+                    || obj.getSa().toLowerCase().contains(str.toLowerCase())){
+
+                myList.add(obj);
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
+        }
+        GailAdapter adapter = new GailAdapter(MainActivity.this,myList);
+        recyclerView.setAdapter(adapter);
     }
 }
