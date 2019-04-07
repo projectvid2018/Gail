@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/moujaBottomId"
+        android:title="@string/mouja"
+        android:icon="@drawable/ic_looks_one_black_24dp"
+        app:showAsAction="always"
+        android:iconTint="@color/md_deep_orange_A200"
+        />
+    <item
+        android:id="@+id/rsBottomId"
+        android:title="@string/rs"
+        android:icon="@drawable/ic_looks_two_black_24dp"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/saBottomId"
+        android:title="@string/sa"
+        android:icon="@drawable/ic_looks_3_black_24dp"
+        app:showAsAction="always"
+        />
+
+</menu>

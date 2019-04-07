@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Gail</string>
+    <string name="thana">থানা</string>
     <string name="mouja">মৌজা</string>
+    <string name="rs">আর এস</string>
+    <string name="sa">এস এ</string>
+
+    <string-array name="search_list">
+        <item>থানা</item>
+        <item>মৌজা</item>
+        <item>আর এস</item>
+        <item>এস এ</item>
+
+    </string-array>
 </resources>

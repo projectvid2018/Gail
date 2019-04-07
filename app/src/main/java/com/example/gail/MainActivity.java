@@ -1,11 +1,13 @@
 package com.example.gail;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,22 +29,41 @@ public class MainActivity extends AppCompatActivity {
     List<GailInfo> gailInfoList;
     SearchView searchView;
     DatabaseReference dbRef;
-    Button addButton;
+    BottomNavigationView bottomNavigationView;
+    int a = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         recyclerView = findViewById(R.id.mainRvId);
-        searchView = findViewById(R.id.search_viewId);
-        addButton = findViewById(R.id.add_rowBtnId);
+        searchView = findViewById(R.id.search_view_Id);
+        bottomNavigationView = findViewById(R.id.bottomNavId);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         gailInfoList = new ArrayList<>();
 
         dbRef = FirebaseDatabase.getInstance().getReference();
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.moujaBottomId){
+                    a = 1;
+                }
+                if (menuItem.getItemId() == R.id.rsBottomId){
+                    a = 2;
+                }
+                if (menuItem.getItemId() == R.id.saBottomId){
+                    a = 3;
+                }
+                return true;
+            }
+        });
 
 
 
@@ -74,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
+
         if (searchView != null){
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -88,16 +110,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+
     }
 
-    private void search(String str) { 
+    private void search(String str) {
         ArrayList<GailInfo> myList = new ArrayList<>();
         for (GailInfo obj : gailInfoList){
-            if (obj.getMouja().toLowerCase().contains(str.toLowerCase())
-                    || obj.getThana().toLowerCase().contains(str.toLowerCase())
-                    || obj.getRs().toLowerCase().contains(str.toLowerCase())
-                    || obj.getSa().toLowerCase().contains(str.toLowerCase())){
+            if (obj.getMouja().toLowerCase().contains(str.toLowerCase()) && a== 1){
+                myList.add(obj);
+            }
 
+            if (obj.getRs().toLowerCase().contains(str.toLowerCase()) && a == 2 ){
+                myList.add(obj);
+            }
+            if (obj.getSa().toLowerCase().contains(str.toLowerCase()) && a == 3){
                 myList.add(obj);
             }
         }

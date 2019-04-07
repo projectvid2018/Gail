@@ -7,30 +7,33 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
     <android.support.v7.widget.SearchView
-        android:id="@+id/search_viewId"
+        android:id="@+id/search_view_Id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        >
     </android.support.v7.widget.SearchView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mainRvId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/search_viewId"
-        android:layout_above="@+id/add_rowBtnId"
+        android:layout_below="@+id/search_view_Id"
+        android:layout_above="@+id/bottomNavId"
+        android:background="@color/md_teal_300"
         >
 
     </android.support.v7.widget.RecyclerView>
 
-    <Button
-        android:id="@+id/add_rowBtnId"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:background="@drawable/ic_add_circle_black_24dp"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavId"
+        app:menu="@menu/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_blue_50"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        >
+    </android.support.design.widget.BottomNavigationView>
 
 
 
